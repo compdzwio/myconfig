@@ -446,6 +446,8 @@ if __name__ == "__main__":
 
 EOF
 
+sudo chmod +x /usr/local/bin/bspi.py
+
 cat <<\EOF | sudo tee /usr/local/bin/bspi_listen >/dev/null
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
