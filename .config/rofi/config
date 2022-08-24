@@ -1,0 +1,23 @@
+configuration {
+        modi: "drun,run";
+        show-icons: true;
+        hover-select: true;
+        me-select-entry: "";
+        me-accept-entry: "MousePrimary";
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+  hover {
+      select: "-me-select-entry";
+  }
+  me {
+      accept-entry: "MousePrimary";
+  }
+}
+
+rofi.theme: /usr/local/share/rofi/themes/spotlight.rasi

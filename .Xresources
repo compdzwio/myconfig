@@ -1,0 +1,172 @@
+! xterm config
+
+! general settings
+xterm*termName: xterm-256color
+xterm*geometry: 80x24
+xterm*saveLines: 809600
+xterm*scrollBar: false
+xterm*loginshell: false
+! xterm*background: black
+! xterm*foreground: gray
+xterm*transparent: true
+xterm*background: #1d1f21
+xterm*foreground: #c5c8c6
+xterm*cursorBlink: false
+xterm*bellIsUrgent: true
+
+! fonts and encoding
+xterm*utf8: true
+xpdf*utf8: true
+xpdf*locale: en_US.UTF-8
+!xpdf*faceNameDoublesize: WenQuanYi Zen Hei Mono:size=15
+!xpdf*faceNameDoublesize: Liga SFMono Nerd Font:size=15
+xterm*locale: en_US.UTF-8
+xterm*utf8Title: true
+xterm*renderFont: true
+xterm*preeditType: Root
+xterm*xftAntialias: true
+! xterm*faceName: monospace:size=16
+xterm*faceName: xft:monospace:size=16
+!xterm*faceName: monospace:size=13
+!xterm*faceNameDoublesize: WenQuanYi Zen Hei Mono:size=15
+!xterm*faceNameDoublesize: SimSun:size=15
+!xterm*inputMethod: ibus
+xterm*inputMethod: fcitx
+
+! trim trailing spaces
+xterm*trimSelection: true
+
+! fix alt-key inputting
+xterm*eightBitInput: false
+xterm*metaSendsEscape: true
+
+! copy and paste with clipboard
+!xterm*translations: #override \
+!Shift <KeyPress> Insert: insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+!Ctrl Shift <KeyPress> V: insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+!<BtnUp>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+*VT100*translations: #override \
+Shift <KeyPress> Insert: insert-selection(CLIPBOARD) \n\
+Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD) \n\
+Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
+<BtnUp>: select-end() 
+!Ctrl <Btn1Down>: ignore() \n\
+!Ctrl <Btn2Down>: ignore() \n\
+!Ctrl <Btn3Down>: ignore() \n\
+!Meta <Btn2Down>: ignore()
+
+! allow selecting email/url by double-click
+xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! tango color scheme
+xterm*color0: #1e1e1e
+xterm*color1: #cc0000
+xterm*color2: #4e9a06
+xterm*color3: #c4a000
+xterm*color4: #3465a4
+xterm*color5: #75507b
+xterm*color6: #0b939b
+xterm*color7: #d3d7cf
+xterm*color8: #555753
+xterm*color9: #ef2929
+xterm*color10: #8ae234
+xterm*color11: #fce94f
+xterm*color12: #729fcf
+xterm*color13: #ad7fa8
+xterm*color14: #00f5e9
+xterm*color15: #eeeeec
+
+
+rxvt*termName: xterm-256color
+rxvt*geometry: 80x24
+rxvt*saveLines: 809600
+rxvt*scrollBar: false
+rxvt*loginshell: false
+! urxvt*transparent: true
+rxvt*background: #1d1f21
+rxvt*foreground: #c5c8c6
+rxvt*cursorBlink: false
+rxvt*bellIsUrgent: true
+
+! fonts and encoding
+rxvt*utf8: true
+rxvt*locale: en_US.UTF-8
+rxvt*utf8Title: true
+rxvt*renderFont: true
+rxvt*preeditType: Root
+rxvt*xftAntialias: true
+rxvt*font: xft:monospace:size=16
+rxvt*inputMethod: fcitx
+rxvt*trimSelection: true
+
+! fix alt-key inputting
+rxvt*eightBitInput: false
+rxvt*metaSendsEscape: true
+rxvt.keysym.Shift-Control-V: eval:paste_clipboard
+rxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+rxvt.iso14755: false
+rxvt.iso14755_52: false
+rxvt*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+rxvt*color0: #1e1e1e
+rxvt*color1: #cc0000
+rxvt*color2: #4e9a06
+rxvt*color3: #c4a000
+rxvt*color4: #3465a4
+rxvt*color5: #75507b
+rxvt*color6: #0b939b
+rxvt*color7: #d3d7cf
+rxvt*color8: #555753
+rxvt*color9: #ef2929
+rxvt*color10: #8ae234
+rxvt*color11: #fce94f
+rxvt*color12: #729fcf
+rxvt*color13: #ad7fa8
+rxvt*color14: #00f5e9
+rxvt*color15: #eeeeec
+
+
+urxvt*termName: xterm-256color
+urxvt*geometry: 80x24
+urxvt*saveLines: 809600
+urxvt*scrollBar: false
+urxvt*loginshell: false
+urxvt*background: #1d1f21
+urxvt*foreground: #c5c8c6
+urxvt*cursorBlink: false
+urxvt*bellIsUrgent: true
+
+! fonts and encoding
+urxvt*utf8: true
+urxvt*locale: en_US.UTF-8
+urxvt*utf8Title: true
+urxvt*renderFont: true
+urxvt*preeditType: Root
+urxvt*xftAntialias: true
+urxvt*font: xft:monospace:size=16
+urxvt*inputMethod: fcitx
+urxvt*trimSelection: true
+
+! fix alt-key inputting
+urxvt*eightBitInput: false
+urxvt*metaSendsEscape: true
+urxvt.keysym.Shift-Control-V: eval:paste_clipboard
+urxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+urxvt.iso14755: false
+urxvt.iso14755_52: false
+urxvt*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+urxvt*color0: #1e1e1e
+urxvt*color1: #cc0000
+urxvt*color2: #4e9a06
+urxvt*color3: #c4a000
+urxvt*color4: #3465a4
+urxvt*color5: #75507b
+urxvt*color6: #0b939b
+urxvt*color7: #d3d7cf
+urxvt*color8: #555753
+urxvt*color9: #ef2929
+urxvt*color10: #8ae234
+urxvt*color11: #fce94f
+urxvt*color12: #729fcf
+urxvt*color13: #ad7fa8
+urxvt*color14: #00f5e9
+urxvt*color15: #eeeeec

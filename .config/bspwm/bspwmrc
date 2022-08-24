@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# pgrep -x sxhkd > /dev/null || sxhkd &
+exec sxhkd &
+exec polybar -r top &
+echo $! > /var/run/user/`id -u`/polybar.pid
+
+exec bspi_listen --config "$HOME/.config/bspwm/bspi.ini" &
+exec dex -a &
+exec udiskie -ant &
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config border_width	2
+bspc config window_gap		12
+
+bspc config split_ratio		0.50
+bspc config borderless_monocle	true
+bspc config gapless_monocle	false
+bspc config initial_polarity	first_child
+
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Nm-connection-editor state=floating
+bspc rule -a Emacs state=tiled
+bspc rule -a Fcitx-config-gtk3 state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a Wine state=floating
+bspc rule -a baidunetdisk state=floating
+bspc rule -a Nestopia state=floating
+
+# synclient RightButtonAreaLeft=0
+# synclient RightButtonAreaTop=0
+# synclient VertScrollDelta=-180
+# synclient HorizScrollDelta=-180
+
+# synclient TapButton2=3
+# synclient TapButton3=2
+# synclient PalmDetect=1
+
