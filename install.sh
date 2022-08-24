@@ -994,7 +994,9 @@ cp .Xresources "$HOME/"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 . "$HOME/.cargo/env"
 export LC_ALL="C.UTF-8"
-cargo install alacritty starship
+cargo install alacritty
+# cargo install starship --locked
+curl -sS https://starship.rs/install.sh | sh
 
 cp .profile "$HOME/"
 cp .bashrc "$HOME/"
