@@ -1001,3 +1001,5 @@ curl -sS https://starship.rs/install.sh | sh
 cp .profile "$HOME/"
 cp .bashrc "$HOME/"
 cp .xsessionrc "$HOME"
+
+sudo servidce xdm restart
