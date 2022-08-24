@@ -460,6 +460,9 @@ bspc subscribe all | while read -r line; do
     esac
 done
 EOF
+
+sudo chmod +x /usr/local/bin/bspi_listen
+
 battery=""
 if [ -d "/sys/class/power_supply/BAT0" ]; then
     battery=" battery"
