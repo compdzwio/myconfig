@@ -984,6 +984,8 @@ element-text {
 }
 EOF
 
+curl -sS https://starship.rs/install.sh | sh
+
 xdg-user-dirs-update
 cp -r .config "$HOME/"
 mkdir -p "$HOME/.config/polybar"
@@ -996,7 +998,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 cargo install alacritty
 # cargo install starship --locked
-curl -sS https://starship.rs/install.sh | sh
 
 cp .profile "$HOME/"
 cp .bashrc "$HOME/"
