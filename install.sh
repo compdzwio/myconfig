@@ -1413,6 +1413,8 @@ bspc rule -a Nestopia state=floating
 # synclient PalmDetect=1
 EOF
 
+chmod +x "$HOME/.config/bspwm/bspwmrc"
+
 cat <<\EOF | tee "$HOME/.config/bspwm/bspi.ini" > /dev/null
 [Icons]
 emacs = 
