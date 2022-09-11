@@ -984,14 +984,827 @@ element-text {
 }
 EOF
 
+sudo git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git /usr/local/share/fonts/SFMono-Nerd-Font-Ligaturized
+
 curl -sS https://starship.rs/install.sh | sh
 
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
+mkdir -p "$HOME/.local/share/dbus-1/services/org.freedesktop.Notifications.service"
+cat <<\EOF | tee "$HOME/.local/share/dbus-1/services/org.freedesktop.Notifications.service" > /dev/null
+[D-BUS Service]
+Name=org.freedesktop.Notifications
+Exec=/usr/lib/notification-daemon/notification-daemon
+EOF
+
 xdg-user-dirs-update
-cp -r .config "$HOME/"
+
+mkdir -p "$HOME/.config/alacritty"
+cat <<\EOF | tee "$HOME/.config/alacritty/alacritty.yml" > /dev/null
+env:
+  TERM: xterm-256color
+
+# background_opacity: 0.90
+# window.opacity: 0.90
+
+window:
+  padding:
+    x: 16
+    y: 16
+  decorations: none
+  opacity: 1
+  dynamic_title: false
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+  # Scrolling distance multiplier.
+  multiplier: 3
+
+font:
+  normal:
+    family: Liga SFMono Nerd Font
+    style: Regular
+  bold:
+    family: Liga SFMono Nerd Font
+    style: Bold
+
+  italic:
+    family: Liga SFMono Nerd Font
+    style: Italic
+  bold_italic:
+    family: Liga SFMono Nerd Font
+    style: Bold Italic
+  size: 16.0
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    y: 0
+    x: 0
+  use_thin_strokes: false
+
+#draw_bold_text_with_bright_colors: false
+
+schemes:
+  rosepine: &rosepine
+    colors:
+    primary:
+      background: "0x191724"
+      foreground: "0xe0def4"
+    cursor:
+      text: "0x191724"
+      cursor: "0x796268"
+    vi_mode_cursor:
+      text: "0x191724"
+      cursor: "0x796268"
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: CellForeground
+      background: "0x2A2738"
+    normal:
+      black: "0x6e6a86"
+      red: "0xeb6f92"
+      green: "0x9ccfd8"
+      yellow: "0xf6c177"
+      blue: "0x31748f"
+      magenta: "0xc4a7e7"
+      cyan: "0xebbcba"
+      white: "0xe0def4"
+    bright:
+      black: "0x6e6a86"
+      red: "0xeb6f92"
+      green: "0x9ccfd8"
+      yellow: "0xf6c177"
+      blue: "0x31748f"
+      magenta: "0xc4a7e7"
+      cyan: "0xebbcba"
+      white: "0xe0def4"
+  nord: &nord
+    colors:
+    primary:
+      background: "#2e3440"
+      foreground: "#d8dee9"
+      dim_foreground: "#a5abb6"
+    cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    vi_mode_cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    selection:
+      text: CellForeground
+      background: "#4c566a"
+    search:
+      matches:
+        foreground: CellBackground
+        background: "#88c0d0"
+      bar:
+        background: "#434c5e"
+        foreground: "#d8dee9"
+    normal:
+      black: "#3b4252"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#88c0d0"
+      white: "#e5e9f0"
+    bright:
+      black: "#4c566a"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#8fbcbb"
+      white: "#eceff4"
+    dim:
+      black: "#373e4d"
+      red: "#94545d"
+      green: "#809575"
+      yellow: "#b29e75"
+      blue: "#68809a"
+      magenta: "#8c738c"
+      cyan: "#6d96a5"
+      white: "#aeb3bb"
+  tokyo-night: &tokyo-night # Default colors
+    primary:
+      background: "0x1a1b26"
+      foreground: "0xa9b1d6"
+
+    # Normal colors
+    normal:
+      black: "0x32344a"
+      red: "0xf7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x787c99"
+
+    # Bright colors
+    bright:
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
+
+  tokyo-night-storm: &tokyo-night-storm # Default colors
+    primary:
+      background: "0x24283b"
+      foreground: "0xa9b1d6"
+
+    # Normal colors
+    normal:
+      black: "#32344a"
+      red: "#f7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x9699a8"
+
+    # Bright colors
+    bright:
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
+  onedark: &onedark
+    primary:
+      background: "0x1e2127"
+      foreground: "0xabb2bf"
+
+    # Normal colors
+    normal:
+      black: "0x1e2127"
+      red: "0xe06c75"
+      green: "0x98c379"
+      yellow: "0xd19a66"
+      blue: "0x61afef"
+      magenta: "0xc678dd"
+      cyan: "0x56b6c2"
+      white: "0xabb2bf"
+
+    # Bright colors
+    bright:
+      black: "0x5c6370"
+      red: "0xe06c75"
+      green: "0x98c379"
+      yellow: "0xd19a66"
+      blue: "0x61afef"
+      magenta: "0xc678dd"
+      cyan: "0x56b6c2"
+      white: "0xffffff"
+  dracunized-knight: &dracunized-knight # Default colors
+    primary:
+      background: "#101a27"
+      foreground: "#c5c3ce"
+
+    # Normal colors
+    normal:
+      black: "#313a33"
+      red: "#c71952"
+      green: "#55a967"
+      yellow: "#e0cf77"
+      blue: "#5164df"
+      magenta: "#b300df"
+      cyan: "#00a8af"
+      white: "#ccccdd"
+
+    # Bright colors
+    bright:
+      black: "#424b44"
+      red: "#d82a63"
+      green: "#66bf78"
+      yellow: "#f1d088"
+      blue: "#6275f0"
+      magenta: "#c411f0"
+      cyan: "#11b9c0"
+      white: "#ddddee"
+  tokyo-dark: &tokyo-dark
+    primary:
+      background: "#11121D"
+      foreground: "#a9b1d6"
+    normal:
+      black: "#32344a"
+      red: "#f7768e"
+      green: "#9ece6a"
+      yellow: "#e0af68"
+      blue: "#7aa2f7"
+      magenta: "#ad8ee6"
+      cyan: "#449dab"
+      white: "#787c99"
+    bright:
+      black: "#444b6a"
+      red: "#ff7a93"
+      green: "#b9f27c"
+      yellow: "#ff9e64"
+      blue: "#7da6ff"
+      magenta: "#bb9af7"
+      cyan: "#0db9d7"
+      white: "#acb0d0"
+colors: *rosepine
+#   primary:
+#     background: "0x1B1623"
+#     foreground: "0xB9C4E3"
+#
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: "0x221E2F"
+#     cursor: "0xADD692"
+#
+#   # Normal colors
+#   normal:
+#     black: "0x0E0C13"
+#     red: "0xE28D8D"
+#     green: "0xADD692"
+#     yellow: "0xF0DC89"
+#     blue: "0x84A5CB"
+#     magenta: "0xAE9AD6"
+#     cyan: "0xF0A8E4"
+#     white: "0xF0F0F5"
+#
+#   # Bright colors
+#   bright:
+#     black: "0x3E4058"
+#     red: "0xE28D8D"
+#     green: "0xADD692"
+#     yellow: "0xF0DC89"
+#     blue: "0x84A5CB"
+#     magenta: "0xAE9AD6"
+#     cyan: "0xF0A8E4"
+#     white: "0xF0F0F5"
+#
+#   indexed_colors:
+#     - { index: 16, color: "0xF0DC89" }
+#     - { index: 17, color: "0xE28D8D" }
+
+selection:
+  save_to_clipboard: true
+
+#cursor:
+# Cursor style
+#style:
+# Cursor shape
+#
+# Values for `shape`:
+#   - ? Block
+#   - _ Underline
+#   - | Beam
+#shape: Block
+
+# Cursor blinking state
+#
+# Values for `blinking`:
+#   - Never: Prevent the cursor from ever blinking
+#   - Off: Disable blinking by default
+#   - On: Enable blinking by default
+#   - Always: Force the cursor to always blink
+#blinking: Off
+
+# Vi mode cursor style
+#
+# If the vi mode cursor style is `None` or not specified, it will fall back to
+# the style of the active value of the normal cursor.
+#
+# See `cursor.style` for available options.
+#vi_mode_style: None
+
+# Cursor blinking interval in milliseconds.
+#blink_interval: 750
+
+# If this is `true`, the cursor will be rendered as a hollow box when the
+# window is not focused.
+#unfocused_hollow: true
+
+# Thickness of the cursor relative to the cell width as floating point number
+# from `0.0` to `1.0`.
+#thickness: 0.15
+
+# Live config reload (changes require restart)
+live_config_reload: true
+# Shell
+#
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+# shell.
+#
+# Default:
+#   - (macOS) /bin/bash --login
+#   - (Linux/BSD) user login shell
+#   - (Windows) powershell
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login
+
+# Startup directory
+#
+# Directory the shell is started in. If this is unset, or `None`, the working
+# directory of the parent process will be used.
+#working_directory: None
+
+# Send ESC (\x1b) before characters when alt is pressed.
+#alt_send_esc: true
+
+key_bindings:
+  - { key: C, mods: Super, action: Copy }
+  - { key: V, mods: Super, action: Paste }
+    #- { key: C, mods: Control, action: Copy }
+    #- { key: V, mods: Control, action: Paste }
+EOF
+
+mkdir -p "$HOME/.config/bspwm"
+
+cat <<\EOF | tee "$HOME/.config/bspwm/bspwmrc" > /dev/null
+exec sxhkd &
+exec polybar -r top &
+echo $! > /var/run/user/1000/polybar.pid
+
+exec bspi_listen --config ~/.config/bspwm/bspi.ini &
+exec dex -a &
+exec udiskie -ant &
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config border_width	2
+bspc config window_gap		12
+
+bspc config split_ratio		0.50
+bspc config borderless_monocle	true
+bspc config gapless_monocle	false
+bspc config initial_polarity	first_child
+
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Nm-connection-editor state=floating
+bspc rule -a Emacs state=tiled
+bspc rule -a Fcitx-config-gtk3 state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a Wine state=floating
+bspc rule -a baidunetdisk state=floating
+bspc rule -a Nestopia state=floating
+
+# synclient RightButtonAreaLeft=0
+# synclient RightButtonAreaTop=0
+# synclient VertScrollDelta=-180
+# synclient HorizScrollDelta=-180
+
+# synclient TapButton2=3
+# synclient TapButton3=2
+# synclient PalmDetect=1
+EOF
+
+cat <<\EOF | tee "$HOME/.config/bspwm/bspi.ini" > /dev/null
+[Icons]
+emacs = 
+gvim = 
+dolphin = 
+brave-browser = 聯
+chromium = 
+firefox = 
+firefox-esr = 
+signal = 
+slack = 
+spotify = 
+smplayer = 
+termite = 
+urxvt = 
+xterm = 
+uxterm = 
+tilix = 
+alacritty = 
+kitty = 
+code-oss = 
+nautilus = 
+Org.gnome.Nautilus = 
+thunderbird = 
+_other = 
+EOF
+
 mkdir -p "$HOME/.config/polybar"
 cp /usr/local/share/polybar/config "$HOME/.config/polybar/config"
-cp -r .local "$HOME/"
-cp .Xresources "$HOME/"
+
+mkdir -p "$HOME/.config/rofi"
+
+cat <<\EOF | tee "$HOME/.config/rofi/config" > /dev/null
+configuration {
+        modi: "drun,run";
+        show-icons: true;
+        hover-select: true;
+        me-select-entry: "";
+        me-accept-entry: "MousePrimary";
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+  hover {
+      select: "-me-select-entry";
+  }
+  me {
+      accept-entry: "MousePrimary";
+  }
+}
+
+rofi.theme: /usr/local/share/rofi/themes/spotlight.rasi
+EOF
+
+mkdir -p "$HOME/.config/sxhkd"
+
+cat <<\EOF | tee "$HOME/.config/sxhkd/sxhkdrc" > /dev/null
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+# super + Return
+#	urxvt
+
+mod4 + Return
+	alacritty
+
+# program launcher
+#super + @space
+#	dmenu_run
+super + @space
+	rofi -modi drun,run -show drun -show-icons
+
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+#super + f
+#	xdotool key ctrl+f
+
+# volume controls
+XF86AudioMute
+	amixer set Master toggle
+
+XF86AudioLowerVolume
+	amixer set Master 1%-
+
+XF86AudioRaiseVolume
+	amixer set Master 1%+
+# XF86AudioMicMute
+
+XF86TouchpadToggle
+	touchpad_toggle
+
+# brightness controls
+# see arch backlight - only root can change intel_brightness - udev rule needed, group video
+XF86MonBrightnessUp
+	xbacklight -inc 10
+XF86MonBrightnessDown
+	xbacklight -dec 10
+
+# XF86Display
+# XF86Favorites
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+#
+# state/flags
+#
+
+# set the window state
+#super + {t,shift + t,s,f}
+#	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {t,shift + t,s,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+# super + {_,shift + }c
+# 	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+EOF
+
+cat <<\EOF | tee "$HOME/.Xresources" > /dev/null
+! xterm config
+
+! general settings
+xterm*termName: xterm-256color
+xterm*geometry: 80x24
+xterm*saveLines: 809600
+xterm*scrollBar: false
+xterm*loginshell: false
+! xterm*background: black
+! xterm*foreground: gray
+xterm*transparent: true
+xterm*background: #1d1f21
+xterm*foreground: #c5c8c6
+xterm*cursorBlink: false
+xterm*bellIsUrgent: true
+
+! fonts and encoding
+xterm*utf8: true
+xpdf*utf8: true
+xpdf*locale: en_US.UTF-8
+!xpdf*faceNameDoublesize: WenQuanYi Zen Hei Mono:size=15
+!xpdf*faceNameDoublesize: Liga SFMono Nerd Font:size=15
+xterm*locale: en_US.UTF-8
+xterm*utf8Title: true
+xterm*renderFont: true
+xterm*preeditType: Root
+xterm*xftAntialias: true
+! xterm*faceName: monospace:size=16
+xterm*faceName: xft:monospace:size=16
+!xterm*faceName: monospace:size=13
+!xterm*faceNameDoublesize: WenQuanYi Zen Hei Mono:size=15
+!xterm*faceNameDoublesize: SimSun:size=15
+!xterm*inputMethod: ibus
+xterm*inputMethod: fcitx
+
+! trim trailing spaces
+xterm*trimSelection: true
+
+! fix alt-key inputting
+xterm*eightBitInput: false
+xterm*metaSendsEscape: true
+
+! copy and paste with clipboard
+!xterm*translations: #override \
+!Shift <KeyPress> Insert: insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+!Ctrl Shift <KeyPress> V: insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+!<BtnUp>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+*VT100*translations: #override \
+Shift <KeyPress> Insert: insert-selection(CLIPBOARD) \n\
+Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD) \n\
+Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
+<BtnUp>: select-end()
+!Ctrl <Btn1Down>: ignore() \n\
+!Ctrl <Btn2Down>: ignore() \n\
+!Ctrl <Btn3Down>: ignore() \n\
+!Meta <Btn2Down>: ignore()
+
+! allow selecting email/url by double-click
+xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! tango color scheme
+xterm*color0: #1e1e1e
+xterm*color1: #cc0000
+xterm*color2: #4e9a06
+xterm*color3: #c4a000
+xterm*color4: #3465a4
+xterm*color5: #75507b
+xterm*color6: #0b939b
+xterm*color7: #d3d7cf
+xterm*color8: #555753
+xterm*color9: #ef2929
+xterm*color10: #8ae234
+xterm*color11: #fce94f
+xterm*color12: #729fcf
+xterm*color13: #ad7fa8
+xterm*color14: #00f5e9
+xterm*color15: #eeeeec
+
+
+rxvt*termName: xterm-256color
+rxvt*geometry: 80x24
+rxvt*saveLines: 809600
+rxvt*scrollBar: false
+rxvt*loginshell: false
+! urxvt*transparent: true
+rxvt*background: #1d1f21
+rxvt*foreground: #c5c8c6
+rxvt*cursorBlink: false
+rxvt*bellIsUrgent: true
+
+! fonts and encoding
+rxvt*utf8: true
+rxvt*locale: en_US.UTF-8
+rxvt*utf8Title: true
+rxvt*renderFont: true
+rxvt*preeditType: Root
+rxvt*xftAntialias: true
+rxvt*font: xft:monospace:size=16
+rxvt*inputMethod: fcitx
+rxvt*trimSelection: true
+
+! fix alt-key inputting
+rxvt*eightBitInput: false
+rxvt*metaSendsEscape: true
+rxvt.keysym.Shift-Control-V: eval:paste_clipboard
+rxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+rxvt.iso14755: false
+rxvt.iso14755_52: false
+rxvt*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+rxvt*color0: #1e1e1e
+rxvt*color1: #cc0000
+rxvt*color2: #4e9a06
+rxvt*color3: #c4a000
+rxvt*color4: #3465a4
+rxvt*color5: #75507b
+rxvt*color6: #0b939b
+rxvt*color7: #d3d7cf
+rxvt*color8: #555753
+rxvt*color9: #ef2929
+rxvt*color10: #8ae234
+rxvt*color11: #fce94f
+rxvt*color12: #729fcf
+rxvt*color13: #ad7fa8
+rxvt*color14: #00f5e9
+rxvt*color15: #eeeeec
+
+
+urxvt*termName: xterm-256color
+urxvt*geometry: 80x24
+urxvt*saveLines: 809600
+urxvt*scrollBar: false
+urxvt*loginshell: false
+urxvt*background: #1d1f21
+urxvt*foreground: #c5c8c6
+urxvt*cursorBlink: false
+urxvt*bellIsUrgent: true
+
+! fonts and encoding
+urxvt*utf8: true
+urxvt*locale: en_US.UTF-8
+urxvt*utf8Title: true
+urxvt*renderFont: true
+urxvt*preeditType: Root
+urxvt*xftAntialias: true
+urxvt*font: xft:monospace:size=16
+urxvt*inputMethod: fcitx
+urxvt*trimSelection: true
+
+! fix alt-key inputting
+urxvt*eightBitInput: false
+urxvt*metaSendsEscape: true
+urxvt.keysym.Shift-Control-V: eval:paste_clipboard
+urxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+urxvt.iso14755: false
+urxvt.iso14755_52: false
+urxvt*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+urxvt*color0: #1e1e1e
+urxvt*color1: #cc0000
+urxvt*color2: #4e9a06
+urxvt*color3: #c4a000
+urxvt*color4: #3465a4
+urxvt*color5: #75507b
+urxvt*color6: #0b939b
+urxvt*color7: #d3d7cf
+urxvt*color8: #555753
+urxvt*color9: #ef2929
+urxvt*color10: #8ae234
+urxvt*color11: #fce94f
+urxvt*color12: #729fcf
+urxvt*color13: #ad7fa8
+urxvt*color14: #00f5e9
+urxvt*color15: #eeeeec
+EOF
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 . "$HOME/.cargo/env"
@@ -999,8 +1812,74 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install alacritty
 # cargo install starship --locked
 
-cp .profile "$HOME/"
-cp .bashrc "$HOME/"
-cp .xsessionrc "$HOME"
+cat <<\EOF | tee "$HOME/.profile" > /dev/null
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+. "$HOME/.cargo/env"
+EOF
+
+cat <<\EOF | tee "$HOME/.bashrc" > /dev/null
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+. "$HOME/.cargo/env"
+eval "$(starship init bash)"
+EOF
+
+cat <<\EOF | tee "$HOME/.xsessionrc" > /dev/null
+if [ "$XRDP_SESSION" = "1" ]; then
+  feh --no-fehbg --bg-fill '/usr/local/share/backgrounds/octocat.jpg'
+  picom -b --config /usr/local/etc/xdg/picom.conf
+fi
+. "$HOME/.profile"
+EOF
 
 sudo servidce xdm restart
