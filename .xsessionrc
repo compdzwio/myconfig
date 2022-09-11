@@ -1,5 +1,0 @@
-if [ "$XRDP_SESSION" = "1" ]; then
-  feh --no-fehbg --bg-fill '/usr/local/share/backgrounds/octocat.jpg'
-  picom -b --config /usr/local/etc/xdg/picom.conf
-fi
-. "$HOME/.profile"
