@@ -6,7 +6,7 @@
 sudo apt install -y software-properties-common
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
-sudo apt install -y vim emacs xdm xorg xserver-xorg-input-synaptics picom feh bspwm polybar rofi gnome-icon-theme dex udiskie alsa-utils fonts-wqy-microhei fonts-wqy-zenhei xfonts-wqy fcitx fcitx-googlepinyin emacs nautilus network-manager network-manager-gnome blueman system-config-printer curl libfontconfig-dev libxcb1-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render0-dev pkg-config cmake
+sudo apt install -y vim emacs xdm xorg xserver-xorg-input-all xserver-xorg-input-synaptics picom feh bspwm polybar rofi gnome-icon-theme dex udiskie alsa-utils fonts-wqy-microhei fonts-wqy-zenhei xfonts-wqy fcitx fcitx-googlepinyin emacs nautilus network-manager network-manager-gnome blueman system-config-printer curl libfontconfig-dev libxcb1-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render0-dev pkg-config cmake
 
 cat <<\EOF | sudo tee /etc/X11/xdm/xdm-config >/dev/null
 
