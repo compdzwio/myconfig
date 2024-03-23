@@ -549,14 +549,14 @@ padding-left = 0
 padding-right = 2
 module-margin-left = 0
 module-margin-right = 0
-font-0 = "Liga SFMono Nerd Font:size=11;2"
-font-1 = "JetBrains Mono:size=11;1"
-font-2 = "WenQuanYi Zen Hei Mono:size=11;2"
-font-3 = fixed:pixelsize=11;1
+font-0 = "Liga SFMono Nerd Font:size=12;2"
+font-1 = "JetBrains Mono:size=12;1"
+font-2 = "WenQuanYi Zen Hei Mono:size=12;2"
+font-3 = fixed:pixelsize=12;1
 font-4 = unifont:fontformat=truetype:size=11:antialias=false;0
-font-5 = siji:pixelsize=11;1
-font-6 = "Iosevka Nerd Font:size=11;4"
-font-7 = "feather:size=11;3"
+font-5 = siji:pixelsize=12;1
+font-6 = "Iosevka Nerd Font:size=12;4"
+font-7 = "feather:size=12;3"
 tray-position = right
 tray-maxsize = 24
 tray-padding = 2
@@ -630,23 +630,19 @@ label-connected = %essid%
 label-connected-radius-top-right = \${attr.label_radius}
 label-connected-radius-bottom-right = \${attr.label_radius}
 
-format-disconnected = %{A1:nm-connection-editor:}<label-disconnected> %{A}
+format-disconnected = %{A1:nm-connection-editor:} 󰖪 <label-disconnected> %{A}
 format-disconnected-offset = \${attr.label_offset}
 format-disconnected-background = \${colors.red}
-label-disconnected = " 睊 %ifname%"
+label-disconnected = %ifname%
 label-disconnected-radius-top-left = \${attr.label_radius}
 label-disconnected-radius-top-right = \${attr.label_radius}
 label-disconnected-radius-bottom-left = \${attr.label_radius}
 label-disconnected-radius-bottom-right = \${attr.label_radius}
 
-ramp-signal-0 = " 直"
+ramp-signal-0 = " 󰖩 "
 ramp-signal-foreground = #9f78e1
 ramp-signal-0-radius-top-left = \${attr.label_radius}
 ramp-signal-0-radius-bottom-left = \${attr.label_radius}
-
-ramp-unsignal-0 = " 睊"
-ramp-unsignal-0-radius-top-left = \${attr.label_radius}
-ramp-unsignal-0-radius-bottom-left = \${attr.label_radius}
 
 [module/date]
 type = internal/date
@@ -674,8 +670,12 @@ label-radius-bottom-left = 3.0
 label-radius-top-right = 3.0
 label-radius-bottom-right = 3.0
 
-[module/alsa]
-type = internal/alsa
+[module/audio]
+;type = internal/alsa
+type = internal/pulseaudio
+
+;sink = alsa_output.platform-es8388-sound.stereo-fallback
+;sink = alsa_output.platform-hdmi0-sound.stereo-fallback
 
 format-volume = <label-volume>
 format-volume-offset = \${attr.label_offset}
@@ -683,8 +683,8 @@ label-volume-radius-top-left = \${attr.label_radius}
 label-volume-radius-top-right = \${attr.label_radius}
 label-volume-radius-bottom-left = \${attr.label_radius}
 label-volume-radius-bottom-right = \${attr.label_radius}
-label-volume = " 奔 %percentage%% "
-label-volume-minlen = 6
+label-volume = " 󰕾 %percentage%% "
+label-volume-minlen = 8
 label-volume-background = \${colors.blue}
 
 format-muted-offset = \${attr.label_offset}
@@ -692,9 +692,18 @@ label-muted-radius-top-left = \${attr.label_radius}
 label-muted-radius-top-right = \${attr.label_radius}
 label-muted-radius-bottom-left = \${attr.label_radius}
 label-muted-radius-bottom-right = \${attr.label_radius}
-label-muted = " 婢 %percentage%% "
-label-muted-minlen = 6
+label-muted = " 󰖁 %percentage%% "
+label-muted-minlen = 8
 label-muted-background = \${colors.blue}
+
+; Available tokens:
+;   %percentage% (default)
+label-muted-foreground = #66
+
+; Only applies if <ramp-volume> is used
+;ramp-volume-0 = "0"
+;ramp-volume-1 = "1"
+;ramp-volume-2 = "2"
 
 [module/battery]
 type = internal/battery
@@ -1377,7 +1386,7 @@ cat <<\EOF | tee "$HOME/.config/bspwm/bspwmrc" > /dev/null
 
 exec sxhkd &
 exec polybar -r top &
-echo $! > /var/run/user/1000/polybar.pid
+echo $! > /var/run/user/\$(id -u)/polybar.pid
 
 exec bspi_listen --config ~/.config/bspwm/bspi.ini &
 exec dex -a &
@@ -1420,7 +1429,7 @@ cat <<\EOF | tee "$HOME/.config/bspwm/bspi.ini" > /dev/null
 emacs = 
 gvim = 
 dolphin = 
-brave-browser = 聯
+brave-browser = 󰒘
 chromium = 
 firefox = 
 firefox-esr = 
@@ -1435,6 +1444,7 @@ uxterm = 
 tilix = 
 alacritty = 
 kitty = 
+org.wezfurlong.wezterm = 
 code-oss = 
 nautilus = 
 Org.gnome.Nautilus = 
@@ -1447,7 +1457,7 @@ cp /usr/local/share/polybar/config "$HOME/.config/polybar/config"
 
 mkdir -p "$HOME/.config/rofi"
 
-cat <<\EOF | tee "$HOME/.config/rofi/config" > /dev/null
+cat <<\EOF | tee "$HOME/.config/rofi/config.rasi" > /dev/null
 configuration {
         modi: "drun,run";
         show-icons: true;
@@ -1470,7 +1480,7 @@ configuration {
   }
 }
 
-rofi.theme: /usr/local/share/rofi/themes/spotlight.rasi
+@theme "/usr/local/share/rofi/themes/spotlight.rasi"
 EOF
 
 mkdir -p "$HOME/.config/sxhkd"
@@ -1714,7 +1724,6 @@ xterm*color13: #ad7fa8
 xterm*color14: #00f5e9
 xterm*color15: #eeeeec
 
-
 rxvt*termName: xterm-256color
 rxvt*geometry: 80x24
 rxvt*saveLines: 809600
@@ -1761,7 +1770,6 @@ rxvt*color12: #729fcf
 rxvt*color13: #ad7fa8
 rxvt*color14: #00f5e9
 rxvt*color15: #eeeeec
-
 
 urxvt*termName: xterm-256color
 urxvt*geometry: 80x24
